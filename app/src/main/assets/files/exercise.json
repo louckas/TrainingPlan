@@ -1,0 +1,17 @@
+{
+  "exerciseGroup": ["Max strength", "Power Endurance", "Conditioning"],
+  "Max strength": {
+    "exercise": ["Max hang2"],
+    "description": ["Hang for 7 to 10s at 80% of your max strength, the goal is to make it hard but not impossible If you fail (slip or let go before the end) adjust the load. Repeat 3 - 5 times on different hold types. Full crimp shouldn't be used for this exercise"]
+  },
+
+  "Power Endurance": {
+    "exercise": ["Long hang"],
+    "description": ["Do 4 reps of 30s hang - 30s rest, rest 1min and repeat 4times "]
+  },
+
+  "Conditioning": {
+    "exercise": ["Push up"],
+    "description": ["Do 10 reps  between 2min and 3min of rest, repeat 3-5 times "]
+  }
+}

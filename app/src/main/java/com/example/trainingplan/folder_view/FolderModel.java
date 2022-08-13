@@ -4,6 +4,8 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.RequiresApi;
+
 import com.example.trainingplan.exercise_view.ExerciseModel;
 
 import java.util.ArrayList;
@@ -22,8 +24,7 @@ public class FolderModel implements Parcelable {
 
     protected FolderModel(Parcel in) {
         folderName_ = in.readString();
-        byte tmpExtended_ = in.readByte();
-        extended_ = tmpExtended_ == 0 ? null : tmpExtended_ == 1;
+        extended_ = in.readByte() != 0;
         exerciseList_ = in.createTypedArrayList(ExerciseModel.CREATOR);
     }
 
@@ -56,11 +57,11 @@ public class FolderModel implements Parcelable {
         return 0;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(folderName_);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            parcel.writeParcelableList(exerciseList_, i);
-        }
+        parcel.writeByte((byte) (extended_ ? 1 : 0));
+        parcel.writeTypedList(exerciseList_);
     }
 }

@@ -1,3 +1,3 @@
-# training_plan_flutter
+# TrainingPlan
 
 A new Flutter project.

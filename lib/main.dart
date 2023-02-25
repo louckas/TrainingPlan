@@ -68,7 +68,7 @@ class _MainBodyState extends State<MainBody> {
           const speedHisterisis = 20.0;
           if (details.primaryVelocity! > speedHisterisis) {
             menuSelected = max((menuSelected - 1), 0);
-          } else if (details.primaryVelocity! < speedHisterisis) {
+          } else if (details.primaryVelocity! < -speedHisterisis) {
             menuSelected = min((menuSelected + 1), 4);
           }
         });

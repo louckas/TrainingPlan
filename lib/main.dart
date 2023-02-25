@@ -44,19 +44,19 @@ class _MainBodyState extends State<MainBody> {
 
     switch (menuSelected) {
       case 0:
-        menu = const Planning();
+        menu = const PlanningPage();
         break;
       case 1:
-        menu = const Workout();
+        menu = const WorkoutPage();
         break;
       case 2:
-        menu = const Exercise();
+        menu = const ExercisePage();
         break;
       case 3:
-        menu = const Overview();
+        menu = const OverviewPage();
         break;
       case 4:
-        menu = const Settings();
+        menu = const SettingsPage();
         break;
       default:
         throw UnimplementedError('No widget for $menuSelected');

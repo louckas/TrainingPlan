@@ -2,6 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import 'pages/planning.dart';
+import 'pages/workout.dart';
+import 'pages/exercise.dart';
+import 'pages/overview.dart';
+import 'pages/settings.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -38,29 +44,19 @@ class _MainBodyState extends State<MainBody> {
 
     switch (menuSelected) {
       case 0:
-        menu = const Placeholder(
-          child: Text("Planning"),
-        );
+        menu = const Planning();
         break;
       case 1:
-        menu = const Placeholder(
-          child: Text("Workout"),
-        );
+        menu = const Workout();
         break;
       case 2:
-        menu = const Placeholder(
-          child: Text("Exercise"),
-        );
+        menu = const Exercise();
         break;
       case 3:
-        menu = const Placeholder(
-          child: Text("Overview"),
-        );
+        menu = const Overview();
         break;
       case 4:
-        menu = const Placeholder(
-          child: Text("Settings"),
-        );
+        menu = const Settings();
         break;
       default:
         throw UnimplementedError('No widget for $menuSelected');

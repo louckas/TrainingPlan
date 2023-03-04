@@ -50,7 +50,7 @@ class _MainBodyState extends State<MainBody> {
         menu = const WorkoutPage();
         break;
       case 2:
-        menu = const ExercisePage();
+        menu = ExercisePage();
         break;
       case 3:
         menu = const OverviewPage();

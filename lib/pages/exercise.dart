@@ -34,26 +34,8 @@ class _ExercisePageState extends State<ExercisePage> {
   @override
   Widget build(BuildContext context) {
     List<Folders> folders = [];
-    // List<Exercises> force = [];
-    // force.add(Exercises('Pull-up', 'Pull-ups x6'));
-    // force.add(Exercises('Max-Hang', '7s hangs'));
-
-    // List<Exercises> endurance = [];
-    // endurance.add(Exercises(
-    //     'Quick pull-ups', '1Mins to do 5 pull-ups, any time left is rest'));
-    // endurance
-    //     .add(Exercises('Long', "30s hang, shouldn't bring to failure #looser"));
-
-    // folders.add(Folders("Force", "Exercises to gain strength", force));
-    // folders.add(Folders("Endurance", "Exercises to gain stamina", endurance));
 
     if (exerciseFile.existsSync()) {
-      // exerciseFile.openWrite();
-      // JsonEncoder encoder = JsonEncoder.withIndent("  ");
-
-      // String json = encoder.convert(folders);
-      // exerciseFile.writeAsString(json);
-
       exerciseFile.openRead();
       String json = exerciseFile.readAsStringSync();
       if (json.isNotEmpty) {

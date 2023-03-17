@@ -1,12 +1,21 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:training_plan_flutter/data_structure/exercises.dart';
+import 'package:training_plan_flutter/data_structure/workout_reps.dart';
 
 import 'pages/planning.dart';
 import 'pages/workout.dart';
 import 'pages/exercise.dart';
 import 'pages/overview.dart';
 import 'pages/settings.dart';
+
+import '../data_structure/folders.dart';
+import '../data_structure/workout.dart';
+
+import '../functions/filesystem.dart';
+import 'dart:io';
+import 'dart:convert';
 
 void main() {
   runApp(const MainApp());
@@ -37,7 +46,54 @@ class MainBody extends StatefulWidget {
 }
 
 class _MainBodyState extends State<MainBody> {
+  File exerciseFile = File("");
+  File workoutFile = File("");
+
   var menuSelected = 0;
+
+  List<Folders> folders = [];
+  List<Workout> workouts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getLocalFile("exercises.json").then(
+      (value) => setState(() {
+        exerciseFile = value;
+        if (!exerciseFile.existsSync()) {
+          exerciseFile.createSync();
+        } else {
+          exerciseFile.openRead();
+          String json = exerciseFile.readAsStringSync();
+          if (json.isNotEmpty) {
+            List jsonMap = jsonDecode(json);
+            for (var j in jsonMap) {
+              folders.add(Folders.fromJson(j));
+            }
+          }
+        }
+      }),
+    );
+
+    getLocalFile("workout.json").then(
+      (value) => setState(() {
+        workoutFile = value;
+        if (!workoutFile.existsSync()) {
+          workoutFile.createSync();
+        } else {
+          workoutFile.openRead();
+          String json = workoutFile.readAsStringSync();
+          if (json.isNotEmpty) {
+            List jsonMap = jsonDecode(json);
+            for (var j in jsonMap) {
+              workouts.add(Workout.fromJson(j));
+            }
+          }
+        }
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget menu;
@@ -47,10 +103,10 @@ class _MainBodyState extends State<MainBody> {
         menu = const PlanningPage();
         break;
       case 1:
-        menu = const WorkoutPage();
+        menu = WorkoutPage(workouts);
         break;
       case 2:
-        menu = const ExercisePage();
+        menu = ExercisePage(folders, exerciseFile);
         break;
       case 3:
         menu = const OverviewPage();

@@ -6,51 +6,27 @@ import 'package:flutter/material.dart';
 import '../data_structure/exercises.dart';
 import '../data_structure/folders.dart';
 
-import '../functions/filesystem.dart';
-
 import 'new_edit_exercise.dart';
 import 'edit_folder.dart';
 
 class ExercisePage extends StatefulWidget {
-  const ExercisePage({super.key});
+  ExercisePage(this.folders, this.exerciseFile, {super.key});
+
+  List<Folders> folders;
+  File exerciseFile;
 
   @override
   State<ExercisePage> createState() => _ExercisePageState();
 }
 
 class _ExercisePageState extends State<ExercisePage> {
-  File exerciseFile = File("");
-  List<Folders> folders = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getLocalFile("exercises.json").then(
-      (value) => setState(() {
-        exerciseFile = value;
-        if (!exerciseFile.existsSync()) {
-          exerciseFile.createSync();
-        } else {
-          exerciseFile.openRead();
-          String json = exerciseFile.readAsStringSync();
-          if (json.isNotEmpty) {
-            List jsonMap = jsonDecode(json);
-            for (var j in jsonMap) {
-              folders.add(Folders.fromJson(j));
-            }
-          }
-        }
-      }),
-    );
-  }
-
   void saveFile() {
-    if (exerciseFile.existsSync()) {
-      exerciseFile.openWrite();
+    if (widget.exerciseFile.existsSync()) {
+      widget.exerciseFile.openWrite();
       JsonEncoder encoder = const JsonEncoder.withIndent("  ");
 
-      String json = encoder.convert(folders);
-      exerciseFile.writeAsString(json);
+      String json = encoder.convert(widget.folders);
+      widget.exerciseFile.writeAsString(json);
     }
   }
 
@@ -63,14 +39,15 @@ class _ExercisePageState extends State<ExercisePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FolderView(folders, onExerciseChange),
+      body: FolderView(widget.folders, onExerciseChange),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
         splashColor: Colors.orange[900],
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NewExercisePage(folders)),
+            MaterialPageRoute(
+                builder: (context) => NewExercisePage(widget.folders)),
           ).then((value) => setState(
                 () {},
               ));

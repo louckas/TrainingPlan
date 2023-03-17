@@ -9,6 +9,7 @@ import '../data_structure/folders.dart';
 import '../functions/filesystem.dart';
 
 import 'new_edit_exercise.dart';
+import 'edit_folder.dart';
 
 class ExercisePage extends StatefulWidget {
   const ExercisePage({super.key});
@@ -94,18 +95,30 @@ class FolderView extends StatelessWidget {
     List<Widget> foldersView = [];
 
     for (Folders f in folders) {
-      foldersView.add(ExpansionTile(
-        title: Text(f.name),
-        initiallyExpanded: foldersView.isEmpty,
-        expandedAlignment: Alignment.centerLeft,
-        children: [
-          Card(
-            borderOnForeground: true,
-            child: Text(f.description),
+      foldersView.add(
+        GestureDetector(
+          child: ExpansionTile(
+            title: Text(f.name),
+            initiallyExpanded: foldersView.isEmpty,
+            expandedAlignment: Alignment.centerLeft,
+            children: [
+              Card(
+                borderOnForeground: true,
+                child: Text(f.description),
+              ),
+              ExerciseView(f.exercises, onExerciseChange),
+            ],
           ),
-          ExerciseView(f.exercises, onExerciseChange),
-        ],
-      ));
+          onLongPress: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditFolderPage(f),
+              ),
+            ).then((value) => {onExerciseChange()});
+          },
+        ),
+      );
     }
 
     return ListView(

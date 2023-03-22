@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data_structure/folders.dart';
+import '../../data_structure/folders.dart';
 
 class EditFolderPage extends StatelessWidget {
   final Folders folder;

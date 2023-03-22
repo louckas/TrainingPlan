@@ -1,8 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:training_plan_flutter/data_structure/exercises.dart';
-import 'package:training_plan_flutter/data_structure/workout_reps.dart';
 
 import 'pages/planning.dart';
 import 'pages/workout.dart';

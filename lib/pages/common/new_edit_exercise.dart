@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../data_structure/exercises.dart';
-import '../data_structure/folders.dart';
+import '../../data_structure/exercises.dart';
+import '../../data_structure/folders.dart';
 
 class NewExercisePage extends StatefulWidget {
   final List<Folders> folders;
